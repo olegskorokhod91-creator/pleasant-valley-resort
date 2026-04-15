@@ -45,14 +45,17 @@
             <img src="/public/assets/lodge_room_1776272813261.png" alt="Lodge Room">
           </div>
           <div class="card-body">
-            <h3 class="card-title">The Lodge Rooms</h3>
+            <button class="card-title-trigger open-info-modal" type="button" data-target="modal-lodge-rooms">
+              <span class="card-title">The Lodge Rooms</span>
+            </button>
             <div class="card-meta">
               <span>Sleeps 2-4</span>
               <span>•</span>
               <span>6 Rooms Total (4 King, 2 Dbl)</span>
             </div>
-            <p>Premium privacy with modern comforts. Perfect for individuals or couples. Featuring high-end bedding and elegant minimal decor.</p>
+            <p>Premium privacy with modern comforts. Perfect for couples, solo travelers, or small family stays with a polished lodge feel.</p>
             <div class="card-footer">
+              <button class="btn btn-outline open-info-modal" type="button" style="flex:1;" data-target="modal-lodge-rooms">Explore Rooms</button>
               <a href="https://us2.cloudbeds.com/reservation/tJv9Eu" class="btn" style="flex:1;">Book</a>
             </div>
           </div>
@@ -263,37 +266,91 @@
     <div class="info-modal-content">
       <button class="info-modal-close">&times;</button>
       
-      <div class="info-hero">
-        <h2 style="font-family: var(--font-heading); font-size: 2.5rem; color: var(--color-charcoal); margin-bottom: 0.5rem;">The Lodge Rooms</h2>
-        <p>Premium privacy with modern comforts • Sleeps 2-4</p>
+      <div class="info-hero info-hero-lodge">
+        <div class="info-hero-copy">
+          <span class="info-kicker">Boutique Resort Stay</span>
+          <h2>The Lodge Rooms</h2>
+          <p>Quiet, comfortable, and polished accommodations for couples, solo guests, and relaxed up-north weekends.</p>
+        </div>
+        <div class="info-hero-actions">
+          <a href="https://us2.cloudbeds.com/reservation/tJv9Eu" class="btn btn-sage">Book The Lodge Rooms</a>
+          <a href="/contact.html" class="btn btn-outline">Ask Us a Question</a>
+        </div>
       </div>
       
       <div class="info-body">
         <div class="info-text">
           <div class="info-description">
-            <p>Our Lodge Rooms offer a boutique resort experience with seamless access to nature. Featuring high-end bedding, elegant minimal decor, and peaceful surroundings, these rooms are perfect for individuals or couples seeking a quiet retreat.</p>
-            <p>There are <strong>6 total rooms</strong> available: 4 luxurious King rooms and 2 spacious rooms with two Double beds each.</p>
-          </div>
-          
-          <div class="info-amenities">
-            <span class="info-amenity-tag">Attached Bathroom</span>
-            <span class="info-amenity-tag">Premium Layout</span>
-            <span class="info-amenity-tag">Boutique Decor</span>
-            <span class="info-amenity-tag">Natural Lighting</span>
+            <p>Our Lodge Rooms bring together a clean boutique look, soft bedding, and easy access to the peaceful resort grounds. They are ideal if you want a private place to recharge after exploring Lake Michigan, nearby trails, or wedding and family events on property.</p>
+            <p>There are <strong>6 rooms total</strong>, including <strong>4 King Rooms</strong> and <strong>2 Double Rooms</strong>, giving you flexible options for couples, friends, or small family groups traveling together.</p>
           </div>
 
-          <a href="https://us2.cloudbeds.com/reservation/tJv9Eu" class="btn btn-sage" style="margin-top: 1rem; display: block; text-align: center;">Book a Lodge Room Now</a>
+          <div class="info-feature-list">
+            <div class="info-feature-item">
+              <strong>Best for</strong>
+              <span>Couples, solo travelers, wedding guests, and overflow family lodging.</span>
+            </div>
+            <div class="info-feature-item">
+              <strong>Layout</strong>
+              <span>Choose from king-bed or two-double-bed setups depending on your group.</span>
+            </div>
+            <div class="info-feature-item">
+              <strong>Feel</strong>
+              <span>Bright, uncluttered interiors with a calm resort atmosphere.</span>
+            </div>
+          </div>
+
+          <div class="info-amenities">
+            <span class="info-amenity-tag">Private Bathroom</span>
+            <span class="info-amenity-tag">King Or Double Options</span>
+            <span class="info-amenity-tag">Boutique Decor</span>
+            <span class="info-amenity-tag">Natural Light</span>
+            <span class="info-amenity-tag">Peaceful Setting</span>
+          </div>
+
+          <div class="info-prompt-panel">
+            <h3>Ready to plan your stay?</h3>
+            <p>Reserve your room now, or reach out if you want help choosing between room types or coordinating multiple rooms for your group.</p>
+            <div class="info-prompt-actions">
+              <a href="https://us2.cloudbeds.com/reservation/tJv9Eu" class="btn btn-sage">Book Now</a>
+              <a href="/contact.html" class="btn btn-outline">Ask a Question</a>
+            </div>
+          </div>
         </div>
         
         <div class="info-gallery-grid">
-          <img src="/public/assets/lodge rooms/Studio King Room.jpg" class="open-gallery" alt="Lodge Room King">
-          <img src="/public/assets/lodge rooms/Studio Double.jpg" class="open-gallery" alt="Lodge Room Double">
-          <img src="/public/assets/lodge rooms/Studio King Room-Bathroom.jpg" class="open-gallery" alt="Lodge Room Bathroom">
-          <img src="/public/assets/lodge rooms/Studio King Room..jpg" class="open-gallery" alt="Lodge Room View">
-          <img src="/public/assets/lodge rooms/Studio Double....jpg" class="open-gallery" alt="Lodge Room Double View">
-          <img src="/public/assets/lodge rooms/Studio King Room-Bathroom....jpg" class="open-gallery" alt="Lodge Room Bathroom View">
-          <img src="/public/assets/lodge rooms/Studio Double.....jpg" class="open-gallery" alt="Lodge Room Layout">
-          <img src="/public/assets/lodge rooms/Studio King Room...jpg" class="open-gallery" alt="Lodge Room Window View">
+          <figure class="info-gallery-item">
+            <img src="/public/assets/lodge rooms/Studio King Room.jpg" class="open-gallery" alt="Lodge Room King">
+            <figcaption>King room with warm wood finishes</figcaption>
+          </figure>
+          <figure class="info-gallery-item">
+            <img src="/public/assets/lodge rooms/Studio Double.jpg" class="open-gallery" alt="Lodge Room Double">
+            <figcaption>Double room setup for flexible group stays</figcaption>
+          </figure>
+          <figure class="info-gallery-item">
+            <img src="/public/assets/lodge rooms/Studio King Room-Bathroom.jpg" class="open-gallery" alt="Lodge Room Bathroom">
+            <figcaption>Private bathroom with clean modern detailing</figcaption>
+          </figure>
+          <figure class="info-gallery-item">
+            <img src="/public/assets/lodge rooms/Studio King Room..jpg" class="open-gallery" alt="Lodge Room View">
+            <figcaption>Comfortable king room from a second angle</figcaption>
+          </figure>
+          <figure class="info-gallery-item">
+            <img src="/public/assets/lodge rooms/Studio Double....jpg" class="open-gallery" alt="Lodge Room Double View">
+            <figcaption>Bright double room with a relaxed resort feel</figcaption>
+          </figure>
+          <figure class="info-gallery-item">
+            <img src="/public/assets/lodge rooms/Studio King Room-Bathroom....jpg" class="open-gallery" alt="Lodge Room Bathroom View">
+            <figcaption>Bathroom detail and vanity space</figcaption>
+          </figure>
+          <figure class="info-gallery-item">
+            <img src="/public/assets/lodge rooms/Studio Double.....jpg" class="open-gallery" alt="Lodge Room Layout">
+            <figcaption>Spacious layout designed for comfort</figcaption>
+          </figure>
+          <figure class="info-gallery-item">
+            <img src="/public/assets/lodge rooms/Studio King Room...jpg" class="open-gallery" alt="Lodge Room Window View">
+            <figcaption>Natural light and quiet lodge atmosphere</figcaption>
+          </figure>
         </div>
       </div>
     </div>
