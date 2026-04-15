@@ -69,4 +69,20 @@ document.addEventListener('DOMContentLoaded', () => {
       openModal(src);
     });
   });
+
+  // Hero Slideshow System
+  const slideshow = document.getElementById('wedding-slideshow');
+  if (slideshow) {
+    const slides = slideshow.querySelectorAll('.slide');
+    if (slides.length > 0) {
+      let currentSlide = 0;
+      
+      // Rotate seamlessly every 6 seconds
+      setInterval(() => {
+        slides[currentSlide].classList.remove('active');
+        currentSlide = (currentSlide + 1) % slides.length;
+        slides[currentSlide].classList.add('active');
+      }, 6000); 
+    }
+  }
 });

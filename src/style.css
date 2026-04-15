@@ -202,8 +202,20 @@ a:hover {
   transition: transform 10s ease;
 }
 
-.hero:hover .hero-bg {
-  transform: scale(1.05);
+/* Slideshow overrides */
+.hero-bg.slide {
+  opacity: 0;
+  transform: scale(1);
+  transition: opacity 2.5s ease-in-out, transform 12s linear;
+}
+
+.hero-bg.slide.active {
+  opacity: 1;
+  transform: scale(1.08); /* Slow continuous zoom while active */
+}
+
+.hero:hover .hero-bg:not(.slide) {
+  transform: scale(1.05); /* Only apply hover zoom to static heroes */
 }
 
 .hero-overlay {
