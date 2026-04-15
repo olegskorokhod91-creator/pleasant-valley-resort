@@ -48,6 +48,154 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const galleryImage = galleryModal.querySelector('#modal-img');
   const galleryCloseButton = galleryModal.querySelector('.modal-close');
+  const bindGalleryTriggers = (root = document) => {
+    root.querySelectorAll('.open-gallery').forEach((element) => {
+      if (element.dataset.galleryBound === 'true') {
+        return;
+      }
+
+      element.dataset.galleryBound = 'true';
+      element.addEventListener('click', (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+
+        const src =
+          element.getAttribute('data-img-src') ||
+          (element.tagName === 'IMG' ? element.src : element.querySelector('img')?.src);
+        const alt =
+          element.getAttribute('data-img-alt') ||
+          (element.tagName === 'IMG' ? element.alt : element.querySelector('img')?.alt) ||
+          'Gallery Image';
+
+        if (src) {
+          openGalleryModal(src, alt);
+        }
+      });
+    });
+  };
+
+  const buildCarousels = () => {
+    document.querySelectorAll('.info-gallery-grid').forEach((galleryGrid, galleryIndex) => {
+      if (galleryGrid.dataset.carouselReady === 'true') {
+        return;
+      }
+
+      const images = Array.from(galleryGrid.querySelectorAll('img')).map((image, imageIndex) => ({
+        src: image.getAttribute('src'),
+        alt: image.getAttribute('alt') || `Accommodation image ${imageIndex + 1}`,
+      }));
+
+      if (images.length === 0) {
+        return;
+      }
+
+      galleryGrid.dataset.carouselReady = 'true';
+      galleryGrid.innerHTML = `
+        <div class="info-carousel" tabindex="0" aria-label="Accommodation photo gallery">
+          <button class="info-carousel-arrow prev" type="button" aria-label="Previous image">&#8249;</button>
+          <div class="info-carousel-viewport">
+            <div class="info-carousel-track">
+              ${images
+                .map(
+                  (image, imageIndex) => `
+                    <button
+                      class="info-carousel-slide open-gallery"
+                      type="button"
+                      data-img-src="${image.src}"
+                      data-img-alt="${image.alt.replace(/"/g, '&quot;')}"
+                      aria-label="Open image ${imageIndex + 1} of ${images.length}"
+                    >
+                      <img src="${image.src}" alt="${image.alt.replace(/"/g, '&quot;')}">
+                    </button>
+                  `
+                )
+                .join('')}
+            </div>
+          </div>
+          <button class="info-carousel-arrow next" type="button" aria-label="Next image">&#8250;</button>
+          <div class="info-carousel-dots">
+            ${images
+              .map(
+                (_, imageIndex) => `
+                  <button
+                    class="info-carousel-dot${imageIndex === 0 ? ' active' : ''}"
+                    type="button"
+                    aria-label="Go to image ${imageIndex + 1}"
+                  ></button>
+                `
+              )
+              .join('')}
+          </div>
+        </div>
+      `;
+
+      const carousel = galleryGrid.querySelector('.info-carousel');
+      const track = carousel.querySelector('.info-carousel-track');
+      const slides = Array.from(carousel.querySelectorAll('.info-carousel-slide'));
+      const dots = Array.from(carousel.querySelectorAll('.info-carousel-dot'));
+      const previousButton = carousel.querySelector('.info-carousel-arrow.prev');
+      const nextButton = carousel.querySelector('.info-carousel-arrow.next');
+      let currentIndex = 0;
+      let autoAdvance;
+
+      const goToSlide = (nextIndex) => {
+        currentIndex = (nextIndex + slides.length) % slides.length;
+        track.style.transform = `translateX(-${currentIndex * 100}%)`;
+        dots.forEach((dot, dotIndex) => {
+          dot.classList.toggle('active', dotIndex === currentIndex);
+        });
+      };
+
+      const startAutoAdvance = () => {
+        clearInterval(autoAdvance);
+        autoAdvance = window.setInterval(() => {
+          goToSlide(currentIndex + 1);
+        }, 4200 + galleryIndex * 120);
+      };
+
+      const stopAutoAdvance = () => {
+        clearInterval(autoAdvance);
+      };
+
+      previousButton.addEventListener('click', () => {
+        goToSlide(currentIndex - 1);
+        startAutoAdvance();
+      });
+
+      nextButton.addEventListener('click', () => {
+        goToSlide(currentIndex + 1);
+        startAutoAdvance();
+      });
+
+      dots.forEach((dot, dotIndex) => {
+        dot.addEventListener('click', () => {
+          goToSlide(dotIndex);
+          startAutoAdvance();
+        });
+      });
+
+      carousel.addEventListener('mouseenter', stopAutoAdvance);
+      carousel.addEventListener('mouseleave', startAutoAdvance);
+      carousel.addEventListener('focusin', stopAutoAdvance);
+      carousel.addEventListener('focusout', startAutoAdvance);
+      carousel.addEventListener('keydown', (event) => {
+        if (event.key === 'ArrowLeft') {
+          event.preventDefault();
+          goToSlide(currentIndex - 1);
+          startAutoAdvance();
+        }
+
+        if (event.key === 'ArrowRight') {
+          event.preventDefault();
+          goToSlide(currentIndex + 1);
+          startAutoAdvance();
+        }
+      });
+
+      startAutoAdvance();
+      bindGalleryTriggers(galleryGrid);
+    });
+  };
 
   const openGalleryModal = (src, alt = 'Gallery Image') => {
     galleryImage.src = src;
@@ -88,24 +236,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  document.querySelectorAll('.open-gallery').forEach((element) => {
-    element.addEventListener('click', (event) => {
-      event.preventDefault();
-      event.stopPropagation();
-
-      const src =
-        element.getAttribute('data-img-src') ||
-        (element.tagName === 'IMG' ? element.src : element.querySelector('img')?.src);
-      const alt =
-        element.getAttribute('data-img-alt') ||
-        (element.tagName === 'IMG' ? element.alt : element.querySelector('img')?.alt) ||
-        'Gallery Image';
-
-      if (src) {
-        openGalleryModal(src, alt);
-      }
-    });
-  });
+  buildCarousels();
+  bindGalleryTriggers();
 
   document.querySelectorAll('.open-info-modal').forEach((element) => {
     element.addEventListener('click', (event) => {
