@@ -48,7 +48,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const closeModal = () => {
     modal.classList.remove('active');
-    document.body.style.overflow = '';
+    // Only restore body overflow if NO info-modals are currently open
+    if (!document.querySelector('.info-modal.active')) {
+      document.body.style.overflow = '';
+    }
   };
 
   closeBtn.addEventListener('click', closeModal);
@@ -57,7 +60,17 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
+    if (e.key === 'Escape') {
+      if (modal.classList.contains('active')) {
+        closeModal();
+      } else {
+        // Also close info modal if image modal isn't open
+        document.querySelectorAll('.info-modal.active').forEach(m => {
+          m.classList.remove('active');
+          document.body.style.overflow = '';
+        });
+      }
+    }
   });
 
   // Attach modal to gallery triggers
@@ -65,10 +78,43 @@ document.addEventListener('DOMContentLoaded', () => {
     el.addEventListener('click', (e) => {
       e.preventDefault();
       // Use data attribute if available, else first image inside
-      const src = el.getAttribute('data-img-src') || el.querySelector('img').src;
+      const src = el.getAttribute('data-img-src') || (el.tagName === 'IMG' ? el.src : el.querySelector('img').src);
       openModal(src);
     });
   });
+
+  // Info Modal System (Room Details)
+  document.querySelectorAll('.open-info-modal').forEach(el => {
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      const targetId = el.getAttribute('data-target');
+      const targetModal = document.getElementById(targetId);
+      if (targetModal) {
+        targetModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+    });
+  });
+
+  document.querySelectorAll('.info-modal-close').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const parentModal = e.target.closest('.info-modal');
+      if (parentModal) {
+        parentModal.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    });
+  });
+
+  document.querySelectorAll('.info-modal').forEach(modalEl => {
+    modalEl.addEventListener('click', (e) => {
+      if (e.target === modalEl) {
+        modalEl.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    });
+  });
+});
 
   // Hero Slideshow System
   const slideshow = document.getElementById('wedding-slideshow');

@@ -41,7 +41,7 @@
         
         <!-- Lodge Rooms -->
         <div class="card">
-          <div class="card-img-wrapper open-gallery" style="cursor: pointer;" data-img-src="/public/assets/lodge_room_1776272813261.png">
+          <div class="card-img-wrapper open-info-modal" style="cursor: pointer;" data-target="modal-lodge-rooms">
             <img src="/public/assets/lodge_room_1776272813261.png" alt="Lodge Room">
           </div>
           <div class="card-body">
@@ -257,6 +257,49 @@
       </div>
     </div>
   </footer>
+
+  <!-- Lodge Rooms Info Modal -->
+  <div class="info-modal" id="modal-lodge-rooms">
+    <div class="info-modal-content">
+      <button class="info-modal-close">&times;</button>
+      
+      <div class="info-hero">
+        <h2 style="font-family: var(--font-heading); font-size: 2.5rem; color: var(--color-charcoal); margin-bottom: 0.5rem;">The Lodge Rooms</h2>
+        <p>Premium privacy with modern comforts • Sleeps 2-4</p>
+      </div>
+      
+      <div class="info-body">
+        <div class="info-text">
+          <div class="info-description">
+            <p>Our Lodge Rooms offer a boutique resort experience with seamless access to nature. Featuring high-end bedding, elegant minimal decor, and peaceful surroundings, these rooms are perfect for individuals or couples seeking a quiet retreat.</p>
+            <p>There are <strong>6 total rooms</strong> available: 4 luxurious King rooms and 2 spacious rooms with two Double beds each.</p>
+          </div>
+          
+          <div class="info-amenities">
+            <span class="info-amenity-tag">En-suite Bathroom</span>
+            <span class="info-amenity-tag">Premium Bedding</span>
+            <span class="info-amenity-tag">Climate Control</span>
+            <span class="info-amenity-tag">Mini Fridge</span>
+            <span class="info-amenity-tag">Smart TV</span>
+            <span class="info-amenity-tag">High-Speed WiFi</span>
+          </div>
+
+          <a href="https://us2.cloudbeds.com/reservation/tJv9Eu" class="btn btn-sage" style="margin-top: 1rem; display: block; text-align: center;">Book a Lodge Room Now</a>
+        </div>
+        
+        <div class="info-gallery-grid">
+          <img src="/public/assets/lodge rooms/Studio King Room.jpg" class="open-gallery" alt="Lodge Room King">
+          <img src="/public/assets/lodge rooms/Studio Double.jpg" class="open-gallery" alt="Lodge Room Double">
+          <img src="/public/assets/lodge rooms/Studio King Room-Bathroom.jpg" class="open-gallery" alt="Lodge Room Bathroom">
+          <img src="/public/assets/lodge rooms/Studio King Room..jpg" class="open-gallery" alt="Lodge Room View">
+          <img src="/public/assets/lodge rooms/Studio Double....jpg" class="open-gallery" alt="Lodge Room Double View">
+          <img src="/public/assets/lodge rooms/Studio King Room-Bathroom....jpg" class="open-gallery" alt="Lodge Room Bathroom View">
+          <img src="/public/assets/lodge rooms/Studio Double.....jpg" class="open-gallery" alt="Lodge Room Layout">
+          <img src="/public/assets/lodge rooms/Studio King Room...jpg" class="open-gallery" alt="Lodge Room Window View">
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Chatbot Iframe -->
   <iframe src="about:blank" style="position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px; border: none; border-radius: 50%; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 10000; background: var(--color-sage);" title="Support Chat"></iframe>
